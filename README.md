@@ -1,8 +1,15 @@
 # Vilagok
 Commodore, Spektrum, Egyesületi lapok
+##
+Szöveg
+>[magazin]_[oldal].txt
 
-szöveg
-[magazin].txt
+Példa: 
+>CommodoreVilag1_1.txt
 
-kép forrás
-[magazin][oldal].png
+##
+Kép forrás
+>[magazin][oldal][sorszam].png
+
+Példa:
+> CommodoreVilag1_1_1.png
