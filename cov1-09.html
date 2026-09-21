@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 9. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Total Eclipse</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 9. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-08.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-10.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Total Eclipse</div>
+      <div class="masthead__number" aria-label="9. oldal">9</div>
+    </header>
+    <article class="page-border editorial" aria-label="Total Eclipse – átírt, kereshető szöveg" lang="hu">
+      <p>Az INCENTIVE software-házat úgy látszik nem nagyon hagyta nyugodni a DRILLER és a DARK SIDE című programjaik sikere, mert nemrég kirukkoltak egy újabb hasonló stílusú 3D játékkal is: a TOTAL ECLIPSE-szel. Ez most nem a fantasztikum világában, az Evath bolygón játszódik, mint elődei, hanem a Földön. 1930. október 26-át írunk, a helyszín Egyiptom, Ré napisten piramisa. Az emberiséget szörnyű veszély fenyegeti: egy ősi átok, amelynek eredete az ókori Egyiptomba nyúlik vissza. Abba az időbe, amikor Egyiptom népe piramisokat emelt királyai tiszteletére és istenekként imádta őket. Egy alkalommal az éhező nép megtagadta a napistennek járó kötelező áldozat bemutatását. Ré egyik mágikus hatalommal rendelkező főpapja erre szörnyű haragra gerjedt és attól való félelmében, hogy a napisten elfordítja arcát Egyiptom földjéről, iszonyú átokkal sújtotta az embereket. Ennek titka a napisten piramisának legfelső helyiségében található. Amennyiben a nappali órákban bármi is meggátolná a piramis csúcsán lévő szentélybe a nap sugarainak akadálytalan behatolását, az megsemmisül. é</p>
+      <p>Az ősi átok csak 1930-ban vált fenyegetővé, amikor a csillagászok teljes napfogyatkozást (innen a játék neve is) jeleztek előre. Ha a napfogyatkozás bekövetkezte előtt nem sikerül megfejteni a rejtély nyitját, akkor a Hold felrobban, és az így bekövetkező meteorvihar elpusztítaná a Földet is. A titok védelmét a piramis szobáinak ördögien bonyolult labirintusrendszere, a számos varázslattal zárva tartott ajtó és függőfolyosó, sőt néhány életre kelt múmia szolgáltatja. Természetesen csak egyvalaki képes ezt az emberfeletti felaclatot teljesíteni — na ezt mindenki kitalálhatja magától is, hogy kiről van szó...</p>
+      <p>A küldetés elején a piramis mellett találjuk magunkat, egy korszerű kétfedelű repülőgép társaságában. Az égen már tisztán látható, hogy a napfogyatkozás már megkezdődött: a Hold lassan a Föld és a Nap közé kerül, és sötétség veszi át az uralmat...</p>
+      <p>Talán nincs mindenki tisztában az INCENTIVE-játékok kezelésével, tehát mielőtt elindulnánk, ismerkedjünk meg a képernyőn lévő ábrák jelentésével, illetve az irányítással.</p>
+      <p>Az egyik legfontosabb összetevő a játékban az idő, amit a képernyő bal alsó sarkában látható karóra jelez. A küldetés 8 órakor kezdődik, és 2 óra áll rendelkezésünkre a teljesítéshez — aztán kaputt.</p>
+      <p>Az óra mellett egy befőttesüveg jelzi a játékos kulacsában lévő víz mennyiségét. Mivel sivatagi körülmények között vagyunk, ez elég gyorsan elfogy és általában a szomjanhalás veszélye fenyeget bennünket. A vizet a négy helyen (a két bejáratnál, és a második szint két szobájában) megtalálható vízmedencéből pótolhatjuk. Ha olyan helyiségbe érkezünk, ahol víz van, feltétlenül töltsük fel a kulacsunkat maximumra! Lehet ugyan víz nélkül is játszani 15-20 percig, de sokat kell közben pihennünk, mert minden hosszabb mozgás nagyon megterhelő, azaz elfáradunk.</p>
+      <p>A szervezet megterhelésének mértékét a dobogó szív mutatja. Ha már nagyon gyorsan ver, meg kell pihennünk néhány percre. Ez az &quot;R billentyű megnyomásával lehetséges: az óra gyorsabban kezd járni és RESTING... felirat jelzi, hogy pihenünk. Pihenni csak a piramis belsejében tudunk, a Szaharában ehhez túl nagy hőség van (TOO HOT FOR RESTING). Ha nagyon gyors a szívverésünk és mégsem pihenúnk meg, hamarosan szívgörcsöt kapunk (HEART FAILURE) és a játék véget ér</p>
+      <p>A szív mellett látható az iránytű, amelynek fekete része mutatja azt az irányt, amerre nézünk.</p>
+      <p>A képernyő bal felső sarkában 5, ún. ankh-jel látható, Az ankh tulajdonképpen egy gabonakereszt stilizált képe, az egyiptomi vallásban az élet szimbólumának tartották. A piramisban is jónéhány ilyen ankh található a földön heverve, vagy a falon illetve a plafonról lógva. Felvételük egyszerűen csak úgy torténik. hogy hozzájuk érünk. A gép ilyenkor az üzenetsorban ANKH FOUND (ankh-ot találtál) feliratot jelenít meg, és a piros ankh-jelek közül az egyiket sárgára színezi (ez jelzi, hogy nálunk van). Az ankh-ok feladata, hogy lehetővé tegyék átjutásunkat a varázslattal zárva tartott ajtókon. Ezeken egy keresztléc akadályozza az átjutást, de ha van nálunk ankh, akkor akadálytalanul keresztülhaladhatunk rajtuk (természetesen ilyenkor. elvesztünk egy ankh-ot is). Egyszerre maximum 5 ankh lehet nálunk</p>
+      <p>Az ankh-jelek mellett látható az általunk elért pontszám. Ezt az ankh-ok begyűjtésével (egyenként --7500 pont). a kincsek felvételével, a ládák kifosztásával. illetve egyes dolgok szétlövésével növelhetjük</p>
+      <p>Kincs felvételéhez csak oda kell mennünk hozzá. --15000 pontot eredményez.</p>
+      <p>Kincsesládában levő kincs megszerzéséhez először ki kell nyitnunk a tetejét (REMOVE LID). Ez úgy történik, hogy a pisztollyal belelövünk egyszer (ne többször, mert akkor becsukódik!). Ezután menjünk oda hozzá, és belenézve illetve a joystick-et folyamatosan előre nyomva szedjük ki belőle a kincset (15-70000 pont). Azt, hogy a kincsesláda kiúrult, onnan tudhatjuk meg, hogy eltűnik vagy felmászunk a tetejére. Megjegyzendő, hogy a túlzott kapzsiság néha szívgörcshöz vezethet.</p>
+      <p>A pontszám mellett látható, hogy a napfogyatkozás mennyire következett már be</p>
+      <p>A képernyő közepén helyezkedik el a játéktér, pontosabban az a nézeti kép, amit a játékos lát. Ezt alul/felül két sor határolja, amelyek közül a felsőnek semmi jelentősége (ha jól látjuk, ez Kleopátra teveszőrbe forgatott teknősláb-receptje, eredeti szövegezés szerint), az alsóban viszont jónéhány értékes információ látható</p>
+      <p>Balról a második jel (H——) mutatja lépéseink méretét, azaz hogy a joystick mozgatásával mekkora távolságot vagyunk képesek egyszerre megtenni. Ennek három fokozata van. amelyek között az S billentyűvel választhatunk.</p>
+      <p>Balról a negyedik jel ( m—— ) azt jelzi, hogy ha a fejünket forgatjuk (fel/le vagy oldalra nézünk). akkor a kurzor egyszerre mennyit mozogjon el. Ennek is három fokozata lehetséges, amit az &quot;A billentyűvel állíthatunk be.</p>
+      <p>A sor közepén látható az üzenetsor. Itt normál esetben az aktuális helyszín neve és jelölése (pl. HORAKHTY-C. NEPHTHYS-F, ILLUSION-D stb.). illetve tengerszint feletti magassága látható A magasság kockában (CUBITS) van megadva 12-sével; a tengerszintnek a 24C felel meg, tehát az első emelet jelölése 36C.a másodiké 48C és így tovább. A napisten szentélye az 5 szinten (84C) található. Ezen a részen jeleníti meg a program az egyes üzeneteket is, pl. ANKH FOUND. NO ENTRY, SUN ECLIPSE stb.</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-9.jpg" alt="Total Eclipse – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

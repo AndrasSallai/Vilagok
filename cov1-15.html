@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 15. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Játékismertetők</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 15. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-14.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-16.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Játékismertetők</div>
+      <div class="masthead__number" aria-label="15. oldal">15</div>
+    </header>
+    <article class="page-border editorial" aria-label="Játékismertetők – átírt, kereshető szöveg" lang="hu">
+      <p>Hm, hát ez egy repülőgépszimuláció (bár ezzel még nem túl sokat</p>
+      <p>mondtunk...). Hogy milyen? Nem rossz, nem rossz. Talán valamit</p>
+      <p>azért elmondhat róla az a tény, hogy 1988-ban ez a program nyerte</p>
+      <p>el az amerikai Software Publishers Association (Software-terjesztők</p>
+      <p>Szervezete) abszolút kategóriájában az &quot;Év legjobb játéka&quot; címet</p>
+      <p>Ez azt jelenti, hogy maguk a játékforgalmazó nagyágyúk (US GOLD,</p>
+      <p>OCEAN, stb.) ítélték egy Spectrum Holobyte nevű ismeretlen kishal</p>
+      <p>programját az 1988. összes játéka közül a legjobbnak. Kommentár</p>
+      <p>talán nem szükséges... Egyébként az USAF (USA Légierő) is megvá-</p>
+      <p>sárolta a programot, és ezen gyakorlatoztatja leendő vadászpilótáit</p>
+      <p>Ezt a megtisztelő címet nem az Amiga-verzió érdemelte ki, hanem a</p>
+      <p>Macintosh II-n és az IBM PC AT-n futó változat. A szaksajtó és a</p>
+      <p>szakemberek szuperlatívuszokat zengtek: &quot;... a program egyszerűen ha 2 ező sát maga a tökély!&quot; — meg hasonlókat. &quot;Tökély?! Micsoda marhaság ez itt, kérem?!&quot; — gondolhatták a Spectrum Holobyte-nál, mert az Amiga-verzió piacra kerülését az eredeti program hat hónap TOVÁBBI fejlesztése előzte meg. Tehát 1988. legjobb játékprogramján még egy fél évet dolgoztak... Most aztán itt van, nesztek! Csodálkoztok, mi?!</p>
+      <p>A játékban egy F-16 típusú elfogó vadászgépet irányítunk — természetesen harci körülmények között. Elméletileg a program 1Mbyte kapacitású Amigára lett tervezve, de fut a standard A500-on is (néhány extra dolog nem működik). Betöltés után egy &quot;egyszerű&quot; képernyő, aztán zutty! — bele a játék közepébe. Bejelentkezünk a pilótanévsorba, majd kiválasztjuk a nehézségi fokozatot és az ellenséges vadászgépek (mindenki találja ki, hogy milyen nemzetiségűek...) számát, azaz hogy egyszerre hány darab legyen belőlük a légtérben. A játék célja természetesen ezeknek a kipucolása a légtérből. A sikeres bevetések sokasodásával a ranglétrán is előrehaladunk. Az ezredes (Colonel) rang elérése után a játék nehezedik: korlátozott fegyverzetet és üzemanyagot vihetünk magunkkal, illetve nehezebbé válik a le- és felszállás.</p>
+      <p>A küldetésekben légi, földi, légi és földi célpontok között választhatunk, összesen 20 db van belőlük. A legalacsonyabb fokozatban (MILK RUN) hadnagyi rangot birtoklunk — ez a gyakorló üzemmód. A fegyverek soha nem fogynak ki és nem tudjuk összetörni a gépet, viszont pontokat gyűjthetünk és be is iratkozhatunk a HighScore-listába. Ha nem gyakorló fokozatot választottunk, a gép fegyverzetét.nekünk kell összeállítanunk — attól függően, hogy milyen bevetésre indulunk. A gyári programhoz egy 143 oldalas könyvet is mellékelnek, ami többek között részletesen felsorolja a rendelkezésre álló fegyvereket, illetve azok legcélszerűbb felhasználási módját. A gépen &quot;fekete doboz&quot; is található, amelynek segítségével visszajátszhatjuk a bevetés izgalmasabb pillanatait.</p>
+      <p>Repülés közben minden irányban (előre/hátra/jobbra/balra) kitekinthetünk a gépből. A képernyő tetején látható pull down-menük használatával vezérelhetjük a hangot, az ellenséges gépek méretét, illetve az irányítást (joystick/egér/billentyűzet). Az ellenség méretének változtatási lehetősége újdonság az előző változatokhoz képest: a duplájára állíthatjuk a méretét, ami azt eredményezi, hogy — megfelelő megközelítés esetén — akár az ellenséges pilóta arcvonásait is láthatjuk</p>
+      <p>A repülés közben néha egy digitalizált női hang figyelmeztet bennunket, ha veszélyhelyzetbe kerultünk. A harc közben hallható hangeffektusok (tüzelés a gépágyúval, rakéta indítása, stb.) is nagyon jól sikerültek.</p>
+      <p>Mint már említettük a Falcon-t IMbyte memóriára tervezték, így 512K-s gépen néhány funkció (egyes hangeffektusok, a fekete doboz és egyes kommunikációs funkciók) nem fog működni. Viszont 512K-n is lehetőség van arra, hogy egy modemen keresztül egy másik Amiga (illetve az azt kezelő ismerősünk) ellen játszhassunk</p>
+      <p>Egyenlőre ennyit a FALCON-ról. Mindenesetre túl jó ez a szimuláció ahhoz, hogy a későbbiekben ne térjünk vissza rá egy kicsit részletesebben.</p>
+      <p>KRISTAL e Prism/Addictive Games</p>
+      <p>A KRISTAL — teljes címén KRISTAL OF KRONOS - egy rendhagyo arcadejadventure, amelynek összes alkotóelemét úgy lopkodták össze mas játékok ötleteiből, mégis az egész egyutt újszerű és nem utolsósorban — nagyon jó. Mi ez? Science fiction? Horror-képregény? Vagy egy Love Story? Majd kiderul — de úgy tűnik, hogy a harom egyutt. Negy lemezen került forgalomba. de ha mást nem, legalább az introját érdemes felvenni. Ebben szinte tökéletesen digitalizalt szöveg hallhato majd fél percig, másrészt a látvány se rossz..</p>
+      <p>A játék kezdetén a főhős. Dancis Frake (a papája adta neki a nevet midőn heves csuklás kozepette próbalt arra a kérdésre válaszolni, hogy ki volt Erzsébet királynő leghíresebb kalóza) mély álomból ébred, és fogalma sincs róla, hogy mi torténik és egyáltalán hogyan kerult erre a helyre. Mindenesetre elindul körbenézni. A legkülönfelebb élőlényekkel találkozik, akik legtobbszór pénzt próbálnak lejmolni tőle. Néhánnyal azonban kellemes csevegést is folytathatunk — ehhez nem kell más, mint némi jártasság az angol nyelvben, egy angol nagy szótár, na meg képzelőerő. A mászkálás a joystick segítségével, a többi cselekvés az adventure-játékok stílusában zajlik: a begepelt szöveggel. Ez nem a szokásos adventure-nyelv: a kommunikació az angol nyelv és helyesírás szabályai szerint zajlik!</p>
+      <p>A csatangolás közben szamos hasznos tárgyat találhatunk, cserélhetunk, amelyeket meg kell próbálnunk a megfelelő helyen felhasználni. A játék egy 10 bolygóból alló galaxisban játszódik, amelyeket a csillagövi jegyek stilizált ábrái jeleznek. A megfelélő ábra választásával kell meghataroznunk melyikre kívánunk utazni. Az utazás eszkoze egy űrhajó, amely cséppet sem nevezhető túl modernnek: az írányítás egy ósdi kormánykerekkel törtenik, a fegyverzet pedig két mnozsárágyú. Az utazásnál lép be a játékba az arcade jelleg: egy kis 3D lövöldözés kovetkezik, ugyanis mindenféle ronda bogarak akadályozzák a leszállást. Megérkezve előfordulhat, hogy csúnya bácsik várnak bennunket és nem engednek minket szétnézni a bolygón Ilyenkor Dancis Frake úgy csinál, mint Hobin Rood: kardot ránt (már amennyiben van nekij vivni kezd. A kard néha eltörik mert nem tokéletes anyagból van (nem ártana majd felcserélni egy jobbra, nem?!) Ha esetleg mi huznank a rövidebbet, visszakerulunk az úrhajora és erőnk lecsökken. Ezt konzervek elfogyasztásával növelhetjük, ezek viszont pénzbe kerulnek. Pénzünk meg kevés van meg egyébként is mindenki megtarhál bennünket. Ordogi kör... Feleslegesen kar eroszakot alkalmazni. mert ezek csokkentik a pszichikai pontjaink számát — akárcsak az. ha a hölgyeknek az angol nyelv &quot;négybetus&quot; szavaival kezdődő mondatokat sugdosunk. A pontszam nő, ha jót cselekszunk, például pénzt adunk valamelyik lamer-nek. Mi a játek celja? Erre Meltoca királya, Kring Narta adja meg a választ rneg kell találnunk Kronos Kristályát; amelyet réges-régen elloptak a Szerelem Csarnokabol Ha ez sikerul. a ronda és önző világ ismét szép lesz, az emberek szeretni fogják egymást, stb, stb Nagyon romantikus — Viszont megéri, mert kalandozásaink közepette találkozunk egy királylánnyal is. aki kiváló domborzati viszonyokkal, valamint hasonlo anyagi helyzettel rendelkezik, és roppantul erdeklődik becses személyunk iránt...</p>
+      <p>A KRISTAL kiváló jatek megeri a négy lemezt. Akinek mégsem tetszene. azoknak ajánljuk a BLOOD MONEY-t vagy a RUNNING MAN -t, amelyek tudvalevőleg nagyon elmés megnyugtató és rendkívül sok gondolkodást igénylő stuffok. Ja. na valaki olyan KRISTAL-t szerzett, amelyben OUARTEX PRESENTS feliratot talal, inkább el se kezdjen játszani: ugyanis mikor már eljutott valarneddig, rádöbsen. hogy valahogy nem jól rnukodik ez a megtort változat. aztán egy helyen egyszer csak kiakad a program SUCK METHANE, OUART EX!</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-15.jpg" alt="Játékismertetők – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

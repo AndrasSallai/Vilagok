@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 18. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Soundtracker V2.3</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 18. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-17.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-19.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Soundtracker V2.3</div>
+      <div class="masthead__number" aria-label="18. oldal">18</div>
+    </header>
+    <article class="page-border editorial columns-2" aria-label="Soundtracker V2.3 – átírt, kereshető szöveg" lang="hu">
+      <p>Egy igazán jó zene elkészítésének alapja az egyes elemeknek (panelek) a precíz kidolgozása. Ehhez a Soundtracker kiváló és egyszerű lehetőséget biztosít.</p>
+      <p>Egy zenéhez összesen 64 panelt szerkeszthetünk, 0000-0063 azonosítóval (természetesen mindegyiket külön hangszerparkkal szerelhetjük fel), amelyeket tetszőleges sorrendben (akár ismételve is) szólaltathatunk meg. Az összefűzésükre a program 128 ún. pozíciót (POSITION) biztosít. Ezek a pozíciók határozzák meg a zene végleges formáját, ugyanis a legyártott panelek abban a sorrendben szólalnak meg, ahogyan a pozíciókhoz hozzárendeljük őket (tehát először az elsőhöz rendelt panel, aztán a másodikhoz... és így tovább). Egy panel hozzárendelése egy pozícióhoz hasonlóképpen történik, mint a SAMPLE funkciónál: a POSITION számlálóját 0000ra ájlítjuk, majd a PATTERN számlálóján beállítjuk annak a panelnak az azonosítóját, amely először fog megszólalni. Ha a POSITION számlálót 0001-re léptetjük, akkor a program megjegyzi, hogy melyik panel szólal meg először.</p>
+      <p>Ez persze még nem elég: a PATTERN alatt lévő LENGTH azonosító tartalmazza a zene aktuális hoszszát, pozíciókban. Ez azt jelenti, hogy lejátszáskor (PLAY) annyi pozíció szólal meg, amennyi a LENGTH-nél be van állítva. Ha tehát azt akarjuk, hogy PLAY parancsra a 0000-0016 pozíciókhoz rendelt panelek szólaljanak meg, akkor a LENGTH értékét 0017-re kell állítanunk.</p>
+      <p>De egyenlőre még nincs mit lejátszanunk, térjünk hát vissza a szerkesztéshez. A panel szerkesztésénél először is meg kell határoznunk, hogy melyik azonosítóval jelölt panel lesz a munka tárgya: vigyük a kurzort a képernyő alsó részére; click-mouse után lilára színeződik, és a rendszer várja a — két decimális számjegyből álló — azonosító begépelését. Ez a szerkesztőtábla felett, a DISK STATUS felirat előtt álló ablakban fog megjelenni. Mint már említettük a program 64 db panelt képes felismerni, tehát a megadott érték 00-63 intervallumba kell, hogy essen (ha 63-nál nagyobb számot adunk meg, a program nem zavartatja magát a felhasználó hibájától: kivon az értékből 64-et és az eredmény által azonosított panelt teszi aktuálissá).</p>
+      <p>A képernyő alsó részén lévő szerkesztő-területen láthatóak az aktuális panel adatai. Ez a terület 5 oszlopra van felosztva: az első oszlop az ütem sorszámát, a többi a négy hangcsatornán megszólaló hang kódját jelzi.</p>
+      <p>e F6:a 00. ütemre áll. e F7&quot;:a15. ütemre áll. e F8:a31. ütemre áll. e F9:a47. ütemre áll. e &quot;F10&quot;: a 63. ütemre áll.</p>
+      <p>A sor elején látható egy piros színű négyzet, a szerkesztő-kurzor, ami meghatározza, hogy az adott hangcsatornán megszólaló hang kódjának melyik részét változtathatjuk meg. A szerkesztő-kurzort a &quot;— illetve a &quot;—&quot; billentyűkkel tudjuk jobbra/balra mozgatni. Ha valamelyik csatornán a hangkódot átjavítottuk, akkor a kurzor automatikusan a hangcsatorna következő ütemére lép. Ha az ütemben további változtatást akarunk, akkor a kurzort a kurzorbillentyűk segítségével vissza kell léptetnünk az ütemre.</p>
+      <p>Most már tudjuk, hogyan kezeljük a szerkesztőt, válasszuk ki tehát, hogy melyik hangszerrel akarjuk az első hangot megszólaltatni. Ez a SAMPLE paraméterének beállításával történik. Ha az adott hangszert már egyszer betöltöttük a memóriába (használtunk már vele kapcsolatban USE PSET parancsot), a billentyűzet segítségével lezsürizhetjük milyen hangokat lehet vele kicsikarni. A billentyűzet mintegy két oktávos zongoraklaviatúraként üzemel, az alábbi felosztás szerint (D-1 az első oktáv d hangját, FX42 a második oktáv fisz hangját jelenti; továbbá megjegyeznénk, hogy a hazánkban h-nak nevezett hang angolszász területen használt megfelelője a b):</p>
+      <p>C4 —-Y C-2 —-G C$1 S CHY2 —&quot;2 DA.—X D-2 —-—W D$§1 —D D4§2 — 3 E-t E-2 —-E Fa —-V F-2 —-R Fé! —-G Fá2 —§ Gi -B aze GY! —H G42 — 6 Ad —-N 1 E AMlkzzl ő A$I —J BZ E Bt MM B:-2 WU</p>
+      <p>A harmadik/negyedik oktáv is az iménti billentyűkkel érhető el, ehhez azonban az &quot;F2&quot; funkcióbillentyűvel megnyomásával át kell váltanunk rájuk. Az első/második oktávhoz az &quot;Fi&quot; megnyomásával térhetünk vissza. Egyes hangszereknél csak az első két oktáv használható, másoknál viszont belép egy ötödik is, ilyenkor az &quot;OP&quot; 890 — billentyűk — megnyomása is hang megszólalását fogja eredményezni. Figyelem! Csak akkor kapunk hangot a fentiekben említett billentyűk megnyomására, ha a szerkesztőterületen lévő piros négyzet valamelyik hangcsatornához tartozó hangkód legelső karakterén áll! Hogy rniért? Erre a következő rész ad választ... (folytatjuk)</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-18.jpg" alt="Soundtracker V2.3 – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

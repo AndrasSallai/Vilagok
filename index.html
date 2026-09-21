@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A Commodore Világ első számának digitálisan restaurált, mobilbarát HTML-pilotja.">
+  <title>Commodore Világ 1. – digitális pilot</title>
+  <style>
+
+:root {
+  --ink: #29251f;
+  --muted: #6f675d;
+  --paper: #f3e8c8;
+  --paper-light: #fffaf0;
+  --blue: #008fbe;
+  --pink: #ee3f78;
+  --yellow: #f4e80b;
+  --shadow: 0 20px 55px rgba(34, 26, 12, .22);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 13% 10%, rgba(255,255,255,.5), transparent 28rem),
+    linear-gradient(135deg, #d9ceb8, #f0e9dc 52%, #cfc4b0);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.62;
+}
+a { color: inherit; }
+img { max-width: 100%; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 56px;
+  padding: .65rem clamp(.8rem, 3vw, 2rem);
+  color: white;
+  background: rgba(22, 25, 28, .94);
+  border-bottom: 3px solid var(--accent, var(--blue));
+  box-shadow: 0 7px 20px rgba(0,0,0,.2);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.topbar__brand { display: flex; align-items: center; gap: .7rem; font-weight: 800; letter-spacing: .05em; }
+.cbm-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #fff;
+  border: 3px solid #fff;
+  border-right-width: 9px;
+  border-radius: 50%;
+  font-size: 0;
+}
+.topbar nav { display: flex; align-items: center; gap: .45rem; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 38px;
+  padding: .35rem .7rem;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 999px;
+  text-decoration: none;
+  font: 700 .82rem/1 Arial, sans-serif;
+}
+.navlink:hover, .navlink:focus-visible { background: var(--accent, var(--blue)); border-color: transparent; }
+.issue-shell { width: min(1500px, 100%); margin: 0 auto; padding: clamp(1rem, 3vw, 3.2rem); }
+.page-card {
+  --accent: var(--blue);
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.04)),
+    repeating-linear-gradient(0deg, rgba(103,72,22,.025) 0 1px, transparent 1px 4px),
+    var(--paper);
+  border: 1px solid rgba(80, 53, 18, .2);
+  border-top: 12px solid var(--accent);
+  box-shadow: var(--shadow);
+}
+body[data-tone="pink"] .page-card { --accent: var(--pink); }
+body[data-tone="cover"] .page-card, body[data-tone="back"] .page-card { --accent: var(--yellow); }
+body[data-tone="ad"] .page-card { --accent: #e8dc19; }
+.page-heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(.8rem, 2vw, 2rem);
+  padding: clamp(.8rem, 2vw, 1.35rem) clamp(1rem, 3vw, 2.4rem);
+  color: white;
+  background: var(--accent);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.platform { font-size: clamp(.62rem, 1.2vw, .82rem); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+.page-heading h1 { margin: 0; text-align: center; font-size: clamp(1.15rem, 3vw, 2.2rem); letter-spacing: .04em; }
+.page-no { font-size: clamp(1.7rem, 4vw, 3.4rem); font-weight: 900; line-height: .85; }
+.view-label {
+  display: inline-flex;
+  margin: 0 0 .9rem;
+  padding: .26rem .65rem;
+  color: white;
+  background: var(--accent);
+  border-radius: 999px;
+  font: 800 .7rem/1.4 Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, .8fr);
+  align-items: start;
+  gap: clamp(1.3rem, 3vw, 3rem);
+  padding: clamp(1.15rem, 3vw, 3.2rem);
+}
+.reader { min-width: 0; }
+.reader-intro {
+  margin: 0 0 1.4rem;
+  color: #5a5146;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .92rem;
+  border-left: 5px solid var(--accent);
+  padding: .6rem 0 .6rem 1rem;
+}
+.article-copy {
+  columns: 2 300px;
+  column-gap: clamp(1.4rem, 3vw, 2.8rem);
+  column-rule: 1px solid rgba(54,42,26,.22);
+  text-align: justify;
+  hyphens: auto;
+  font-size: clamp(.98rem, 1.3vw, 1.12rem);
+}
+.article-copy p { margin: 0 0 .9em; orphans: 3; widows: 3; break-inside: avoid; }
+.article-copy p:first-child::first-letter {
+  float: left;
+  margin: .06em .11em 0 0;
+  color: var(--accent);
+  font: 800 3.7em/.76 Georgia, serif;
+}
+.facsimile { position: sticky; top: 84px; min-width: 0; }
+.scan-frame {
+  margin: 0;
+  padding: clamp(.55rem, 1.2vw, .9rem);
+  background: #242321;
+  border-radius: 3px;
+  box-shadow: 0 14px 32px rgba(0,0,0,.28);
+  transform: rotate(.15deg);
+}
+.scan-frame img { display: block; width: 100%; height: auto; background: #efe0b9; }
+.scan-frame figcaption { padding: .65rem .2rem .05rem; color: #eee8dd; font: .76rem/1.45 Arial, sans-serif; }
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem clamp(1rem, 3vw, 2.4rem);
+  color: #fff;
+  background: var(--accent);
+  font: 700 .76rem/1.4 Arial, sans-serif;
+}
+.scan-only .content-grid { grid-template-columns: minmax(0, 850px); justify-content: center; }
+.scan-only .facsimile { position: static; }
+.scan-only .scan-frame { transform: none; }
+.scan-only .scan-frame figcaption { text-align: center; }
+.notice {
+  margin: 1rem auto 0;
+  padding: .9rem 1.1rem;
+  color: #4f4639;
+  background: rgba(255,250,240,.75);
+  border: 1px solid rgba(80,53,18,.16);
+  font: .82rem/1.5 Arial, sans-serif;
+}
+@media (max-width: 920px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .facsimile { position: static; order: 2; width: min(620px, 100%); margin-inline: auto; }
+  .reader { order: 1; }
+  .article-copy { columns: 1; text-align: left; }
+  .reader-intro { font-size: .86rem; }
+}
+@media (max-width: 590px) {
+  .topbar__brand span:last-child { display: none; }
+  .topbar { padding-inline: .6rem; }
+  .navlink { min-width: 36px; min-height: 34px; padding-inline: .5rem; }
+  .issue-shell { padding: 0; }
+  .page-card { border-inline: 0; box-shadow: none; }
+  .page-heading { grid-template-columns: auto 1fr auto; }
+  .platform { max-width: 56px; }
+  .page-heading h1 { text-align: left; }
+  .content-grid { padding: 1rem; }
+  .page-footer { flex-direction: column; }
+}
+@media print {
+  .topbar, .notice { display: none; }
+  body { background: white; }
+  .issue-shell { width: 100%; padding: 0; }
+  .page-card { box-shadow: none; }
+  .facsimile { position: static; }
+}
+
+.cover-hero {
+  display: grid;
+  grid-template-columns: minmax(250px, 430px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: center;
+  padding: clamp(1.2rem, 4vw, 4rem);
+  color: #1f221f;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(255,255,255,.7), transparent 24rem),
+    linear-gradient(135deg, #f2ec0c, #f3d917);
+  border-top: 14px solid #119d9f;
+  box-shadow: var(--shadow);
+}
+.cover-hero img { display: block; width: 100%; box-shadow: 0 20px 45px rgba(0,0,0,.28); transform: rotate(-.7deg); }
+.kicker { color: #b42828; font: 900 .8rem/1.2 Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.cover-copy h1 { margin: .25rem 0; color: #e92f2f; font: 900 clamp(2.6rem, 8vw, 6.8rem)/.88 Arial Black, Arial, sans-serif; letter-spacing: -.055em; }
+.cover-copy h2 { margin: .2rem 0 1.2rem; color: #075c82; font: 800 clamp(1.35rem, 3vw, 2.4rem)/1.08 Arial, sans-serif; }
+.cover-copy p { max-width: 58ch; font-size: clamp(1rem, 1.6vw, 1.2rem); }
+.start-button { display: inline-block; margin-top: .7rem; padding: .8rem 1.2rem; color: white; background: #067f9f; border-radius: 3px; text-decoration: none; font: 800 .9rem/1 Arial, sans-serif; box-shadow: 5px 5px 0 #e93652; }
+.toc { margin-top: clamp(1.4rem, 4vw, 3.5rem); padding: clamp(1rem, 3vw, 2.2rem); background: rgba(255,250,240,.86); border: 1px solid rgba(80,53,18,.2); box-shadow: var(--shadow); }
+.toc h2 { margin: 0 0 1.1rem; color: #087c9f; font: 900 clamp(1.4rem, 3vw, 2.3rem)/1.1 Arial, sans-serif; }
+.page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 1rem; }
+.page-tile { overflow: hidden; color: inherit; background: #f6ecd0; border: 1px solid rgba(60,45,20,.18); text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
+.page-tile:hover, .page-tile:focus-visible { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(40,30,10,.17); }
+.page-tile img { display: block; width: 100%; aspect-ratio: 1459/2048; object-fit: cover; object-position: top; background: #eee3bd; }
+.tile-copy { display: block; padding: .72rem .8rem .9rem; }
+.tile-no { display: block; margin-bottom: .28rem; color: var(--tile-accent, #078db6); font: 900 .67rem/1 Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.tile-title { display: block; font: 800 .88rem/1.25 Arial, sans-serif; }
+.page-tile[data-tone="pink"] { --tile-accent: var(--pink); }
+.page-tile[data-tone="cover"], .page-tile[data-tone="back"], .page-tile[data-tone="ad"] { --tile-accent: #aa9200; }
+@media (max-width: 760px) {
+  .cover-hero { grid-template-columns: 1fr; }
+  .cover-hero img { width: min(410px, 100%); margin-inline: auto; }
+  .cover-copy { text-align: center; }
+  .cover-copy p { margin-inline: auto; }
+}
+@media (max-width: 430px) { .page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; } }
+
+  </style>
+</head>
+<body>
+  <header class="topbar" style="--accent: var(--blue)">
+    <div class="topbar__brand"><span class="cbm-mark" aria-hidden="true"></span><span>COMMODORE VILÁG · DIGITÁLIS ARCHÍVUM</span></div>
+    <nav><a class="navlink" href="#oldalak">Oldalak</a></nav>
+  </header>
+  <main class="issue-shell">
+    <section class="cover-hero">
+      <img src="images/cov1--1.jpg" alt="A Commodore Világ első számának címlapja">
+      <div class="cover-copy">
+        <span class="kicker">Digitálisan restaurált pilot</span>
+        <h1>COMMODORE<br>VILÁG</h1>
+        <h2>1. szám · C64/128, C16/Plus 4, Amiga</h2>
+        <p>Az eredeti lap hangulata változatlanul megmarad, miközben a cikkek szövege kereshető, kijelölhető és telefonon is kényelmesen olvasható.</p>
+        <a class="start-button" href="cov1-01.html">Olvasás az első oldaltól →</a>
+      </div>
+    </section>
+    <section class="toc" id="oldalak">
+      <h2>A lapszám oldalai</h2>
+      <div class="page-grid">
+
+        <a class="page-tile" data-tone="cover" href="cov1-borito.html">
+          <img src="thumbs/cov1--1.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">Címlap</span>
+            <span class="tile-title">Címlap</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-belso-borito.html">
+          <img src="thumbs/cov1-0.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">Belső borító</span>
+            <span class="tile-title">Programkollekciók</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-01.html">
+          <img src="thumbs/cov1-1.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">1. oldal</span>
+            <span class="tile-title">Bejelentkezés</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-02.html">
+          <img src="thumbs/cov1-2.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">2. oldal</span>
+            <span class="tile-title">Játékismertetők – Neuromancer</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-03.html">
+          <img src="thumbs/cov1-3.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">3. oldal</span>
+            <span class="tile-title">Játékismertetők – The Last Ninja és Times of Lore</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-04.html">
+          <img src="thumbs/cov1-4.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">4. oldal</span>
+            <span class="tile-title">Játékismertetők és software-forgalmazók</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-05.html">
+          <img src="thumbs/cov1-5.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">5. oldal</span>
+            <span class="tile-title">The Last Ninja</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-06.html">
+          <img src="thumbs/cov1-6.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">6. oldal</span>
+            <span class="tile-title">The Last Ninja</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-07.html">
+          <img src="thumbs/cov1-7.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">7. oldal</span>
+            <span class="tile-title">The Last Ninja és Operation Wolf</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-08.html">
+          <img src="thumbs/cov1-8.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">8. oldal</span>
+            <span class="tile-title">The Last Ninja, Thunder Blade és Vindicator</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-09.html">
+          <img src="thumbs/cov1-9.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">9. oldal</span>
+            <span class="tile-title">Total Eclipse</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-10.html">
+          <img src="thumbs/cov1-10.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">10. oldal</span>
+            <span class="tile-title">Total Eclipse</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-11.html">
+          <img src="thumbs/cov1-11.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">11. oldal</span>
+            <span class="tile-title">Total Eclipse</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-12.html">
+          <img src="thumbs/cov1-12.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">12. oldal</span>
+            <span class="tile-title">Total Eclipse</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-13.html">
+          <img src="thumbs/cov1-13.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">13. oldal</span>
+            <span class="tile-title">Total Eclipse térkép</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-14.html">
+          <img src="thumbs/cov1-14.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">14. oldal</span>
+            <span class="tile-title">Játékismertetők</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-15.html">
+          <img src="thumbs/cov1-15.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">15. oldal</span>
+            <span class="tile-title">Játékismertetők</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-16.html">
+          <img src="thumbs/cov1-16.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">16. oldal</span>
+            <span class="tile-title">Soundtracker V2.3</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-17.html">
+          <img src="thumbs/cov1-17.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">17. oldal</span>
+            <span class="tile-title">Soundtracker V2.3</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-18.html">
+          <img src="thumbs/cov1-18.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">18. oldal</span>
+            <span class="tile-title">Soundtracker V2.3</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-19.html">
+          <img src="thumbs/cov1-19.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">19. oldal</span>
+            <span class="tile-title">Vírus!</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-20.html">
+          <img src="thumbs/cov1-20.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">20. oldal</span>
+            <span class="tile-title">Vírus!</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-21.html">
+          <img src="thumbs/cov1-21.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">21. oldal</span>
+            <span class="tile-title">Spiky Harold</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-22.html">
+          <img src="thumbs/cov1-22.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">22. oldal</span>
+            <span class="tile-title">Fényújság</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-23.html">
+          <img src="thumbs/cov1-23.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">23. oldal</span>
+            <span class="tile-title">ELITE</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="pink" href="cov1-24.html">
+          <img src="thumbs/cov1-24.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">24. oldal</span>
+            <span class="tile-title">ELITE</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-25.html">
+          <img src="thumbs/cov1-25.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">25. oldal</span>
+            <span class="tile-title">Lemezes AUTOSTART-rutin</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-26.html">
+          <img src="thumbs/cov1-26.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">26. oldal</span>
+            <span class="tile-title">Lemezes AUTOSTART-rutin</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-27.html">
+          <img src="thumbs/cov1-27.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">27. oldal</span>
+            <span class="tile-title">Lemezes AUTOSTART-rutin</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-28.html">
+          <img src="thumbs/cov1-28.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">28. oldal</span>
+            <span class="tile-title">Lemezes AUTOSTART-rutin</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-29.html">
+          <img src="thumbs/cov1-29.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">29. oldal</span>
+            <span class="tile-title">A C nyelv</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-30.html">
+          <img src="thumbs/cov1-30.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">30. oldal</span>
+            <span class="tile-title">A C nyelv</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-31.html">
+          <img src="thumbs/cov1-31.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">31. oldal</span>
+            <span class="tile-title">Pályázati rejtvény</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="blue" href="cov1-32.html">
+          <img src="thumbs/cov1-32.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">32. oldal</span>
+            <span class="tile-title">Tartalomjegyzék</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="ad" href="cov1-belso-hatlap.html">
+          <img src="thumbs/cov1-33.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">Belső hátlap</span>
+            <span class="tile-title">Műszaki Könyvkiadó</span>
+          </span>
+        </a>
+        <a class="page-tile" data-tone="back" href="cov1-hatlap.html">
+          <img src="thumbs/cov1-34.jpg" alt="" loading="lazy">
+          <span class="tile-copy">
+            <span class="tile-no">Hátlap</span>
+            <span class="tile-title">A jövő hónapban ismét találkozunk!</span>
+          </span>
+        </a>
+      </div>
+    </section>
+    <p class="notice"><strong>A pilot célja:</strong> kipróbálni a teljes sorozathoz használható formát. Minden oldal önálló HTML-fájl, saját beágyazott CSS-sel; külső stíluslap és JavaScript nélkül működik.</p>
+  </main>
+</body>
+</html>
