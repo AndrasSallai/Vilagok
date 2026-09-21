@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 5. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – The Last Ninja</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="blue">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 5. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-04.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-06.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">The Last Ninja</div>
+      <div class="masthead__number" aria-label="5. oldal">5</div>
+    </header>
+    <article class="page-border editorial" aria-label="The Last Ninja – átírt, kereshető szöveg" lang="hu">
+      <p>A Spectrum Világ azon Olvasói, akik C-64-gyel rendelkeznek és megvásárolták annak a 17. részét roppant elégedettek lehettek: a LAST NINJA 2.-nek nemcsak a Spectrum-os, hanem a C-64-es verzió leírását is kézhez kaphatták. Ezek után viszont nagyon sok levél érkezett hozzánk, amelyben a 64-esek megköszönték fáradozásainkat és érdeklődtek, hogy mihez kezdjen az, aki még az első résszel sem tudott zöld ágra vergődni. Ez meglehetősen meglepett bennünket (mármint az, hogy még van olyan, aki nem tudott végigkecme-! RNI A sájljájájks § 3; dili regni az elsőn), de úgy döntöttünk, hogy a Commodore-tábort megcélzó kiad- z LULULATSÉBTK ványunk első számában &quot;segítünk&quot; rajtuk. Íme...;</p>
+      <p>A történet háttere: a $&quot;/drétffcefi: nevű nindzsafaluba hírnökök érkeznek Csikicsuki shoguntól, akik megbízzák a falu vezetőjét azzal, hogy raboljon el egy fontos iratot Kunitoki shoguntól, aki a japán szigetország feletti egyeduralomra tör, A falu elöljárója nem tartja nagy dolognak az ügyet, s ezért egy fiatal genint bíz meg a végrehajtással. Az ő feladata lesz, hogy összeszedje felszerelését, a vadonon átkelve bejusson Kunitoki kastélyába és annak szentélyéből elhozza az íratot. Mint később kiderül, a vezető kicsit alábecsülte a Kunitoki védelmét biztosító őrök és csapdák erejét, mert a fiatal nindzsának minden ügyességére szüksége lesz a küldetés teljesítéséhez...</p>
+      <p>A program 1987-ben jelent meg a piacon és teljesen elképesztette a vásárlóközönséget: még egyetlen játékprogram sem egyesítette ilyen kiválóan az arcade és az adventure kategória stílusjegyeit, nem beszélve a szinte tökéletes grafikáról/animációról és a fantasztikusan jól eltalált zenéről. A sikerről is csak felsőfokú jelzőkkel beszélhetünk: talán csak a Jóisten a megmondhatója annak, hogy a játék hány hétig volt abszolút első a különféle eladási- és sikerlistákon. Elég talán annyit elmondani, hogy az 1987-ben megjelent többezer játékprogram közül a közönség ezt választotta az év játékának...</p>
+      <p>Talán nem csoda, hogy egy ilyen minőségű játékra éhes cápaként rontottak a cracker urak, és így nem sokkal a gyári program megjelenése után már kazettás/lemezes változatok garmadája állt rendelkezésre mindenkinek. A legpraktikusabbnak a TCS által feltört változatot tartjuk, ebben ugyanis a játék bejelentkezése előtt egy táblázatban kiválaszthatjuk, hogy milyen könnyítéseket kérünk: WEAPONS felirat alatt megadhatjuk, hogy milyen fegyverek legyenek nálunk, SPECIAL-nél kérhetünk végtelen számú életet, füstbombát és surikent kérhetünk, illetve OBJECTS-ben megadhatjuk, hogy mely tárgyak legyenek nálunk már kezdéskor. A fényes fehér feliratok az érvényesek, választásuk a kurzor-billentyűk és a &quot;RETURN! segítségével lehetséges. &quot;SPACE&quot; megnyomására a beállított paraméterekkel az a szint töltődik be, amelyet a SPECIAL-nél kiválasztottunk. Sajnos ezt a praktikus megoldást csak azok élvezhetik, akik lemezegységgel rendelkeznek, a C101-es kollekció kazettás változata kötött beállításokat tartalmaz. Itt szeretnénk még kitérni a C101 kazettás változatnál felmerülő betöltési problémákra is. Azok között, akik ezt a kollekciót megrendelték, sokan gondba ütköztek a betöltést illetően. Az egyes szintek a lemezes változatból cartridge-zsel lettek letörve, a lementés pályánként 2 részben történt. A turbóval be kell tölteni az első részt, ez mindössze néhány fordulatnyi a kazettás egységen. Amikor a Datasette motorja megáll, ne kapcsoljuk ki azt, hanem adjuk ki: RUN (-4-RETURN), a képernyő elsötétedik és a betöltés folytatódik. Egy-két perc múlva a képernyőn &quot;mákosodás&quot; jelenik meg, a Datasette motorja megáll, majd ismét tovább indul, de 1-2 másodperc elteltével beindul a játék. Ekkor a kazettés egységet nekünk kell kikapcsolni. Ha a szint végére értünk, sajnos a gépet ki kell kapcsolnunk, a következő szint betöltése az itt ismertetett módszerrel lehetséges. Előnyösebb tehát a lemezes verzió használata.</p>
+      <p>A játékszabályokra nem vesztegetünk sok szót, bizonyára már mindenki ismeri őket:</p>
+      <p>6 Az ENEMY WOUNDS szöveggel jelzett sáv jelzi az aktuális ellenség energiaszintjét,</p>
+      <p>6$ A FOUND/COLLECT alatt látható, hogy éppen milyen tárgyat gyűjtöttünk be, vagy ha a Buddha-szobornál imádkozunk, akkor az, hogy az istenség milyen tárgy beszerzését javasolja. Játék közben ezen a helyen a USING felirat látható, ami azt jelzi, hogy a nindzsa milyen fegyvert tart a kezében, azaz mit tud az ellenség ellen használni (ha nincs nálunk semmilyen fegyver, vagy az ablakban nem látható semmi, a puszta kéz a fegyver). A fegyvereket a &quot;SPACE&quot; megnyomásával váltogathatjuk.</p>
+      <p>6 HOLDING felirat mutatja, hogy milyen tárgyat tartunk a kezünkben, mit tudunk éppen felhasználni valamilyen célból.</p>
+      <p>s A POWER felett tekergő csík a játékos &quot;kigyóereje&quot;, azaz hátralevő energiája. A váltogatás a meglévő tárgyak között az &quot;F3&quot; és F5 billentyűkkel történik.</p>
+      <p>e A WEAPONRY mutatja, hogy milyen fegyverek közül tudunk választani a &quot;SPACE&quot; billentyűvel</p>
+      <p>o A zenét az F1 billentyűvel kapcsolhatjuk ki/be</p>
+      <p>6 Az &quot;F7&quot; megnyomásával szünetet tarthatunk, újbóli megnyomásra a játék folytatódik</p>
+      <p>6 A RUN/STOP&quot; megnyomására a nindzsa rituális öngyilkosságot, harakirit követ el és a játék véget ér</p>
+      <p>Azt, hogy a fegyveres és fegyvertelen harc hogyan történik, nem magyarázzuk, mert egy kis próbálgatás után mindenki magától is rájön. A suriken és a füstbomba eldobása a joystick jobbra vagy balra húzásával és a tűz&quot; egyidejű megnyomásával történik (a tárgyak és felszerelések begyűjtése jobbra le vagy balra le - tűz&quot;). Na indulás...</p>
+      <p>— fustbomba kard suriken nuricsaku</p>
+      <p>Az első szinten a feladatunk felvegyverkezni és összegyűjteni az egyéb kütyüket. A fegyverek közül a nuncsakut egy piros ruhába öltözött, az út mellett heverésző halott egyén övén, a kardot egy útkanyarulatban álldogáló sziklahalom között, a surikent (5 db-os készlet) a természet lágy ölén, a füstbombát (3 darabos kollekció) a mocsár előtti kanyarban találhatjuk meg. További tárgyak is várakoznak</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-5.jpg" alt="The Last Ninja – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

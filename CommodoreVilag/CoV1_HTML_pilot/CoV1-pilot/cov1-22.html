@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 22. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Fényújság</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 22. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-21.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-23.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Fényújság</div>
+      <div class="masthead__number" aria-label="22. oldal">22</div>
+    </header>
+    <article class="page-border editorial" aria-label="Fényújság – átírt, kereshető szöveg" lang="hu">
+      <p>Jónéhány PLUS4-játék cracker-ek által feltört változatában találkozhatunk olyan effektussal, amikor a képernyő valamelyik részén fényújság-szerűen scrollozódik valamilyen szöveg, ami a cracker (áljnevét, üdvözleteit (GREETINGS TO...), kevésbé barátságos üzeneteit (... AND A LITTLE FUCK TO MY DEAR FRIEND...), és ehhez hasonló marhaságokat láthatunk. Az alábbiakban bemutatásra kerülű rutin segítségével hasonló effektust produkálhatunk: a karakteres képernyő utolsó sorában görgethetünk bármilyen, 39 karakternél nem hosszabb szöveget.</p>
+      <p>A forráslistát nem kommenteztük be, inkább szóban ismertetjük a működését:</p>
+      <p>Amint az a címekből is látszik, az egész programot a processzorveremben helyeztük el. Erre azért volt szükség, hogy az esetleg mellette használni kívánt BASIC-programunk nehogy felülírja. A rutin működtetését a gép megszakítás-rendszerére bíztuk rá, hogy — amint a megfelelő POKE utasításokat kiadtuk — külön beavatkozás nélkül is minden egyes megszakítás-ciklusban végrehajtódjon. Ez tette lehetővé, hogy BASIC programokban is tökéletesen — gyakorlatilag BASIC-program lassulása nélkül is — felhasználható legyen.</p>
+      <p>A rutin az első két sorában letiltja a legalsó sor használatát, hogy a szöveget ne tudjuk felülírni, csak POKE utasításokkal. A következő három sor a megszakítás nyugtázása, majd a raszter-regiszter lekérdezése, E regiszter felülírásával tudjuk beállítani, hogy melyik videósornál kérjen megszakítást. A $0131-es címen található összehasonlítással egy elágazást hozunk létre: ha az interrupt a $BO-ás sornál történt, akkor a sor görgetése végrehajtódik, és új értéket adva a raszter regiszternek ($CC) befejeződik az interrupt. Ha valaki járatos a megszakítás-rendszerben, az tudja, hogy az utolsó sor a $C3-as raszter-sortól kezdve látható a képernyőn. Mi mégis a $BO-tól kérünk megszakítást. Ennek az oka, hogy a karakterek egy hellyel való balra tolása ($0174-$018C) körülbelül annyi időt vesz igénybe, hogy mire befejeződik, a videósor kirajzolása is odaér a $C3-as rasztersorba. Ha viszont nem átpakolni kell a karaktereket, hanem csak egy Ppixellel eltolni őket ($FFO7), akkor meg kell várni, amíg a videósor kirajzolása a $C3-as sorig elér ($015F-$0164). Ezzel az időzítéssel érhetjük el a törésmentes görgetést</p>
+      <p>0123 sp j $$17 015F AE 1D FF LDX $FFID 0125 E5 $07E5 0162 E0 C3 $5C3 0128 09 $FF09 0164 DO F9 $015F 012B 09 $FF09 0166 OD 07 $FF0O7 012E 0B $FFOB 0169 8D 07 $FF0O7 0131 BO $$BO 016C A2 FD 4$CC 0133 06 $013B 016E BE OB $FFOB 0135 bk) $0153 0171 4C 8D $018D 0138 BE $FCBE 0174 A9 07 4507 013B BO $$BO 0176 B8D 95 $0195 013D OB $FFOB 0179 AC CO $OFCO 0140 hul $DB11 017C A2 00 $500 0143 BF $CFBF 017E BD Cl $OFCL,X 0146 07 $FF0O7 0181 co $OFCO,X 0149 FO $$FO 0184 014B 08 4508 0185 27 4$$27 014D 07 $FFO7 0187 F5 $017E 0150 BE $FCBE 0189 E7 $0FE7 0153 95 $0195 018cC 0156 00 4500 018D 95 01 $0195</p>
+      <p>A rutin BASIC-ben való felhasználását az alábbi egyszerű péidaprogrammal kívánjuk bemutatni</p>
+      <p>FOR I-1 TO 25: PRINT: NEXT I PRINT&quot;EZT A PUDERT FOGOM SCROLLOZNI&quot;; POKE 405,7</p>
+      <p>REM $ ITT KEZDODIK A FOPROGRAM t</p>
+      <p>A 10. sorban egy képernyőtörlést hajtunk végre, hogy a képernyő 25. sora biztosan üres legyen A 20. sor ciklusa a kurzor 25. sorba való mozgatását végzi. A 30.sorban sorban kiíratjuk a scrollozni kívánt szöveget. Itt két dologra kell vigyáznunk:</p>
+      <p>6 39 karakternél ne legyen hosszabb a szöveg.</p>
+      <p>6 A pontosvesszőt ne felejtsük le a PRINT utasítás végéről. Ha ez megtörténik akkor a rutin egy ures sort fog görgetni, mivel a</p>
+      <p>képernyőre kiiratott sorunk egy sorral feljebb csúszik a képernyő-seroll miatt.</p>
+      <p>A 40. sorban a számlálórekeszt feltöltjük az alapul szolgáló 7-es értékkel (ez tárolja a képernyő bitenkénti eltolásához szükséges alapértéket) Az 50. sorban a megszakítás-rendszerre léptetjük rutinunkat, azaz megadjuk az IRO-vektornak a rutin kezdőcímét. Innen kezdve fog működni a fényújságunk A 60. sorban egy újbóli képernyőtörléssel a kurzort a képernyő bal felső sarkába pozicionáljuk. Erre csak azért van szükség, hogy a 25. sorból elmozdítsuk a kurzor mutatóját és így az 1.-től a 24. sorig tartó képernyő-ablakunk zavartalanul működhessen</p>
+      <p>Amennyiben valahol le akarjuk állítani a görgetést, írjuk be programunk megfelelő részére a következő utasításokat: XXX POKE 788,14: POKE 789,206: POKE 2021,24</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-22.jpg" alt="Fényújság – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

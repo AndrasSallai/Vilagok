@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 10. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Total Eclipse</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 10. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-09.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-11.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Total Eclipse</div>
+      <div class="masthead__number" aria-label="10. oldal">10</div>
+    </header>
+    <article class="page-border editorial" aria-label="Total Eclipse – átírt, kereshető szöveg" lang="hu">
+      <p>Jobbról a harmadik jel (egy emberalak) jelöli, hogy a játékos milyen testhelyzetben van. A piramisban előfordulhat, hogy olyan akadály elé kerülünk, amit csak négykézlábra ereszkedve tudunk áthidalni. A testhelyzet változtatása a &quot;H! billentyű megnyomásával történik. Jobbról a negyedik jel (eredetileg egy piramis) mutatja a kurzor állapotát. Ez kétféle lehet: vagy keresőkurzor (ekkor látjuk a piramist), vagy a pisztoly célkeresztje (ekkor pisztolyt látunk) s</p>
+      <p>A többi jel jelentését nem sikerült kisütnünk, mert a játék folyamán nem változtak, de gyanítjuk, hogy csak dekorációs célokat szolgálnak.</p>
+      <p>A három dimenziós játéktérben való tájékozódást a játékképernyő közepén lévő keresőkurzor segítségével oldották meg a játék készítői. Ez azt jelenti, hogy a játékos abba az irányba halad, amerre a kurzor mutat. A helyváltoztatás a PORT2-be dugott joystick segítségével történik, de a billentyűzetet is használhatjuk, az alábbi felosztás szerint: yi jú — mozgás előre; &quot;—&quot; — mozgás hátra; &quot;Aa — fordulás balra (helyben!); W&quot; — fordulás jobbra.</p>
+      <p>A kurzor dinamikusan alkalmazkodik a környezetéhez, hogy mindig jól látható legyen, de a &quot;-4-&quot; billentyű megnyomásával ki is kapcsolhatjuk. Eredetileg szemmagaságban van, de a játék folyamán szükség lesz rá, hogy a fejünket is mozgassuk, le- illetve felnézzünk, Ez a &quot;P&quot; illetve az &quot;L&quot; billentyűk használatával lehetséges</p>
+      <p>Az &quot;U&quot; billentyű megnyomásával 180 fokos fordulatot hajthatunk végre, azaz teljesen megfordulhatunk,</p>
+      <p>Felszerelésünkhöz tartozik egy pisztoly is, korlátlan számú tölténnyel, ami nélkülözhetetlen segítséget nyújt a küldetés teljesítésében. Tüzelhetünk akkor is, ha keresőkurzoron vagyunk (tűz? gomb vagy &quot;SHIFT), de célszerűbb a SPACE&quot; megnyomásával átváltani a célkeresztre, mert így pontosabban tudunk célozni. Ilyenkor a joystick nem a mozgást, hanem a célkereszt irányzását szolgálja, tehát ha tovább akarunk menni, vissza kell váltanunk a keresőkurzorra.</p>
+      <p>A játék megoldása eredetileg egyenlő lenne a lehetetlennel. Mivel a programozók beépítettek egy játékállás-mentési lehetőséget, ez az esély most kb. 1:1000 arányban mozog, de ez dinamikusan változik pozitív irányba a ráfordított időmennyiség és káromkodássorozat függvényében (a Commodore Világ-féle teljes leírási tényező ezt az arányt természetesen 1:1-re csökkenti — majd később). Miután sikeresen visszaeveztünk a matematikai mámor vizeiről a TOTAL ECLIPSE-hez, akkor tudatjuk, hogy az &quot; billentyű megnyomására megjelenik a képernyőn egy menü, amelynek SAVE (S) funkciójával játékállást menthetünk, a LOAD-dal (&quot;L&quot;) játékállást tölthetünk, a &quot;RUN/STOP--pal pedig kiléphetünk a játékból (persze előbb végig kell néznünk a robbanást). Más billentyű megnyomására a játék folytatódik. Ha a SAVE/LOAD közül választottuk valamelyiket, a program érdeklődik, hogy TAPE vagy DISK (T/D), és kéri a file-nevet (max. 5 karakter, plusz ő még hozzárak egy &quot;-te&quot; kiterjesztést). A lemezre való mentés megformázott floppyt igényel, egy állás mérete 3 blokk. -</p>
+      <p>Mint már említettük, a játék célja a szentély titkának kiderítése. Ez kellemes időtöltés egy jó darabig, figyelembe véve, hogy a program szerzői mindent elkövettek annak érdekében, hogy ez nehogy valakinek sikerüljön. Az ajtókat varázslatok védik, néhány ajtó a levegőben lebeg és nem vezet hozzá lépcső (egyenlőre!), tréfás függőfolyosók, amelyekről az ember egy rossz lépéssel lepottyan, (majdnem) megoldhatatlan labirintusrendszer, és néhány nagy meglepetés... Még nem is beszéltünk az állandó vízhiányról, a szorító időről és azokról a múmiákról, amelyek hirtelen előbukkannak szarkofágjukból és célbalőnek ránk. Ha ezek után még lennének olyanok, akik azt fontolgatják, hogy csak azért is önállóan vágnak neki a játéknak (ÉRDEMES!), azoknak gratulálunk elhatározásukhoz, és adunk néhány megszívlelendő jótanácsot:</p>
+      <p>e Indulásnál egy ajtót láthatsz a piramis oldalán. De lehet, hogy nem ez az egyetlen bejárat?! Biztos. Mielőtt ezen keresztül behatolnál, menj át a piramis átellenes oldalára és ott lőjj bele az — egyenlőre zárt — ajtón lévő jelbe. Az ajtó kinyílik. Így már KI lehet jönni majd a piramisból...</p>
+      <p>6 Ha olyan helyszínre érkezel, ahol víz van, mindig töltsd fel maximumra a kulacsot.</p>
+      <p>6 Ha új szobába lépsz, mentsd ki az állást (a gondolkodással az idő és a víz fogy!), majd mindent vizsgálj meg alaposan (a plafont is!).</p>
+      <p>6 Ha olyan tárgyat találsz, amit nem ismersz fel és nem is tudsz felvenni, célszerű belelőni egyet. Ezután nézz körbe ismét a szobában! Ha semmi változás lőjj bele még 8-10 golyót. Akkor talán lesz... Ugyanez az eljárás alkalmazandó a falon lévő néhány ábrával.</p>
+      <p>e A kacskaringós, vékony függőfolyosón nézz a lábad elé, mert leesel!</p>
+      <p>e Van olyan akadály is, amit sem ankh-hal, sem pisztollyal nem lehet elhárítani, De hát végül is te elég erős ember vagy, nem...?!</p>
+      <p>e Az ILLUSION-útvesztőt csak véletlenül lehet helyesen megoldani: balra/jobbra/jobbra/előre/vissza (igenigenigen, amerről jöttél, de nem megfordulva!). Nicsak, egy lépcső... Most is jön egy kis meglepetés, jól nézz körbe! A földre is...</p>
+      <p>e Vannak olyan függőfolyosók, amelyek eltűnnek, ha beléjük lősz. De van egy olyan is, ami elfordul. Csak le ne ess róla később... (puska: 4 hosszú előre, 1 rövid vissza és tűz!)</p>
+      <p>Na ennyi elég is lesz nekik... Sok szerencsét!</p>
+      <p>Azoknak pedig, akik elakadtak volna valahol, vagy — neadjisten — jobban kedvelik a kényelmet, itt következik egy teljes leírás (ez nem az összes varázslat megoldását tartalmazza, csak azokét, amelyek a feladat teljesítéséhez szükségesek; a további rejtélyek felderítése maradjon az Olvasó feladata):</p>
+      <p>Itt vagyunk a piramis előtt ennek a korszerű légiközlekedési eszköznek a társaságában. Mit keres ez itt?! Netán valami feladata van...? Zsürizzük le. Másszunk fel mondjuk a jobb szárnyára (ne a szárny végén, mert elakadunk a merevítőkben!), és sétáljunk a törzse felé. Nicsak, egy ankh! Kösz. Másszunk szépen vissza az anyaföldre (anyahomokra), és nézzük meg a piramist. Hm, egy ajtó. Ez gyanús, így túl egyszerű lenne. Kerüljük meg a piramist, lesz ott egy másik is. Menjünk be és nézzünk körül. Egy vízmedence (kulacsfeltöltés!) és egy zárt ajtó fogad minket. Igazán kultúrálatlan fogadtatás az ókor részéről... Elégedetlenségünknek adjunk hangot azzal, hogy belelővünk egyet az ajtón lévő jelbe. Kinyílt. Ez később még jól jöhet, most menjünk vissza a piramis másik ajtajához és menjünk be rajta,</p>
+      <p>Egy újabb vízmedence fogad, illetve egy falon lógó ankh. Miután felvettük ballagjunk tovább észak felé. Egy jól berendezett szoba: felül függőfolyosó, körbe egy csomó ajtó, a sarokban egy kincs... meg még valami. Miután felvettük a kincset, foglalkozzunk ezzel a valamivel egy kicsit. Ha jól megnéztük a szobát, láthattunk egy ajtót a magasban, ahová nem vezet lépcső. Lőjünk bele EGYET a valamibe. Hmmmm, de korszerű építkezési technika: lépcső épült a semmiben lebegő ajtóhoz. Nem baj, jó lesz az még később. Induljunk el dél felé, fel a lépcsőn. Ennek csak egy akadálya van: egy fal. Durr! Volt fal — nincs fal, mehetünk.</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-10.jpg" alt="Total Eclipse – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

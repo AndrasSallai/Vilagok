@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 17. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Soundtracker V2.3</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 17. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-16.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-18.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Soundtracker V2.3</div>
+      <div class="masthead__number" aria-label="17. oldal">17</div>
+    </header>
+    <article class="page-border editorial columns-2" aria-label="Soundtracker V2.3 – átírt, kereshető szöveg" lang="hu">
+      <p>e Zöld: lemezművelet-mód. A DISK OP. ikon almenüjének kiválasztása után kaphatjuk, azt jelzi, hogy a program a lemezegységgel kommunikál.</p>
+      <p>e Piros: a program írási/olvasási művelet közben valamilyen bizonytalanságot vagy hibát észlelt. Ha hiba történt a DISK STATUS sorban jelzi a hiba okát (normál esetben ez ALL RIGHT — minden rendben). e Sárga: play-mód. A program a teljes zenét vagy az aktuális panelt játssza.</p>
+      <p>A szerkesztés megkezdése előtt hajtsunk végre egy CLEAR utasítást: vigyük a kurzort a CLEAR feliratra, és nyomjuk meg az egér bal oldali gombját (a következőkben is így történnek a kijelölések). Ez törli a memóriában levő zenét, a hozzá tartozó paramétereket és a panel szerkesztése közben használt puffert — azaz alapállapotba állítja a programot.</p>
+      <p>Ezután adjunk nevet a készülő műnek: vigyük a kurzort a SONGNAME feliratú sorra, kiválasztása után gépeljük be a kívánt nevet, majd nyomjuk meg az &quot;Enter-t.</p>
+      <p>Ha a programot először használjuk, akkor javasolt a SUNDAY EVENING NIGHTMARE, a LAMER SYMPHO- NY vagy egyszerűen az IDEGROHAM SZONÁTA elnevezések használata — így produkciónk végeredménye meglehetős összhangba kerül a címével.</p>
+      <p>A hangszerpark kiválasztása</p>
+      <p>A szerkesztést a hangszerpark összeválogatásával kell megkezdeni. Mint már említettük, egy panelhez összesen 32 hangszer (SAMPLE) rendelhető hozzá (Mozart-nak mondjuk könnyebb dolga volt azzal az egy zongorával). Szerkesztés közben az azonosítójukkal hivatkozunk rájuk, hexa 0000-tól 001F-ig (természetesen nem kötelező mind a 32 hangszerhelyet kitöltenünk). A hivatkozás a default hangszerre vonatkozik, amelyet a SAMPLE felirat melletti nyilak használatával jelölünk ki. A default hangszer neve és az aztt tartalmazó lemez azonosítója a SAMPLE NAME felirat mellett látható.</p>
+      <p>A hangszerekre a decimális azonosítójukkal hivat-</p>
+      <p>kozhatunk. A választás a PRESET felirat melletti</p>
+      <p>nyilak segítségével történik, az azonosító változtatá- &quot; sával a SAMPLE NAME felirat mellett is folyamato-. san megjelenik az aktuális hangszer neve. Ha a hangszert használni akarjuk, akkor válasszuk a funkciók közül az USE PSET feliratot. Ekkor a hangszerhez tartozó paraméterek betöltődnek a memóriába (System Reguest felirat kéri a megfelelő lemezt a meghajtóba), és automatikusan hozzárendelődnek a hangszerpark aktuális azonosítóhoz, azaz a SAMPLE mellett álló értékhez. Ha a hangszer már egyszer be lett töltve a memóriába, akkor a klaviatúra segítségével már zenélhetünk is vele.</p>
+      <p>ni. Állítsuk a SAMPLE melletti számot 0001-re, a PRESET mellettit 0023-ra, és válasszuk a USE PSET feliratot. A 0023 azonosítójú hangszer betöltődik lemezről és hozzárendelődik a SAMPLE 0001 hangszerhez. Léptessük a SAMPLE értékét 0002-re, a PRESET mellettit 45-re...és így tovább. Ha ezután a SAMPLE értékét visszaállítjuk 0001-re, akkor a program a 023 azonosítójú hangszerre fog &quot;gondolni&quot;.</p>
+      <p>A program állandó nyilvántartást vezet arról, hogy milyen hangszerek állnak rendelkezésre, így tehát ha törlünk egyet, akkor nemcsak a hangszert tartalmazó lemezt kéri a törléshez, hanem az ST-00-t is, hogy módosítsa a nyilvántartást. Ugyanez történik a hangszer átnevezésénél is, vagy — azoknál a verzióknál, amelyekben beépített digitalizáló rutin is megtalálható — új &quot;hangszer&quot;-ek kreálásánál. A V2.3 verzióban nincs digitalizálási lehetőség.</p>
+      <p>A SAMPLE alatti feliratok az aktuális hangszer néhány saját jellemzőjét tartalmazzák (a nyilakkal ezek is állíthatóak).</p>
+      <p>A VOLUME azt a hangerőt jelzi hexa 0000-tól 0040ig, amellyel a hangszer megszólal (0040 a max. hangerő, 0000 esetén csend honol a hangcsatornán).</p>
+      <p>A LENGTH a hangszer-adatok teljes byte-hosszát jelzi hexadecimálisan. Ezt hangszernél nem célszerű állítgatni, mert esetleg meglepetések érhetnek bennünket: ha növeljük, megszólal az utoljára használt, az aktuálisnál hosszabb hangszer lecsengése, ha viszont csökkentjük, akkor elveszti csengését. Jól használható viszont digitalizált szövegeknél, amikor pl. csak a szöveg első részét akarjuk megszólaltatni (persze egy darabig eltart, míg beállítjuk a pontos értéket).</p>
+      <p>A REPEAT egy ismétlési tényező, ami azt határozza meg, hogy a hangszer adatok REPLEN-ben megadott hossza — a LENGTH-ben megadottak elhangzása után — hányszor ismétlődjön.</p>
+      <p>A REPLEN az ismétlendő byte-hossz, ami — értelemszerűen — maximum a LENGTH után álló értékig terjedhet. Ha: hangszernél alkalmazzuk — optimális beállítás esetén — a doromb hangjához hasonló hatást érhetünk el vele (dob típusú hangszereknél kevésbé hatásos). Ha a &quot;hangszer&quot; digitalizált szöveg, akkor — LENGTH - REPLEN esetében — a szöveget teljes egészében ismételhetjük, vagy — LENGTH: REPLEN esetében — a szöveg elhangzása után a szöveg eleje ismétlődik.</p>
+      <p>Ez utóbbi két jellemző értelmezését a későbbiekben egy kicsit tovább boncolgatjuk, mert működésük megértéséhez még további információkra van szükségünk a programról.</p>
+      <p>Miután befejeztük a hangszerpark kiválasztását, már neki is kezdhetünk a készülő zene egy paneljének megszerkesztéséhez.</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-17.jpg" alt="Soundtracker V2.3 – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

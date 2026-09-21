@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 11. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – Total Eclipse</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="pink">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 11. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-10.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-12.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">Total Eclipse</div>
+      <div class="masthead__number" aria-label="11. oldal">11</div>
+    </header>
+    <article class="page-border editorial" aria-label="Total Eclipse – átírt, kereshető szöveg" lang="hu">
+      <p>Miután átkerültünk a következő szobába, a csomó ajtón kívül még egy dolog vonja magára a figyelmünket: egy pózna van a szoba közepén. Miután felnéztünk a plafonra, rájöhetünk, hogy nem egy egyiptomi tűzoltócsúszda, hanem biztonsági előírás a tolvajokkal szemben... ugyanis egy kincsesláda van a tetején. Most sok-sok durr következik: lőjük addig a póznát, amíg el nem tűnik és a láda le nem pottyan a földre. Miután a kincset bezsebeltük, távozzunk észak felé a középső ajtón. Ugyanoda jutottunk, ahol a lépcsőt építettük, csak most fenn vagyunk a függőfolyosón. Menjünk tovább rajta, észak felé.</p>
+      <p>A következő szobában forduljunk nyugatra, és távozzunk az ottani ajtón. Ne siessünk nagyon-az átjáróból kilépve, mert csak egy if platóra érkezünk és esetleg lepottyanhatunk róla. A szemben lé-</p>
+      <p>vő falon egy nagy szem bámul a semmibe. Mint ismert szemészeti specialisták vegyük elő precíziós műszerünket (a pisztolyt) és lőjünk bele egyet. Azonnali eredmény! Kacsint egyet és közli, hogy MATCH MADE (ejtsd: mecsméd). OK (ejtsd: oké), aztán ejtőzzünk vissza oda, ahonnan jöttünk. Ha az emlékezet nem lenne tökéletes, akkor dióhéjban: kelet/dél/dél/a bal oldali ajtón észak és már ott is vagyunk, ahol a lépcsőt építettük kelet felé. Most fogunk rajta felmenni.</p>
+      <p>Mihelyt megérkezünk egy szarkofággal találjuk szemben magunkat, amelynek egyszercsak kinyílik az ajtaja és... &quot;Szia, Ramszesz!&quot; — mondhatnánk, de a csevegéssel nem sokat érünk, lőjünk bele inkább a múmia fejébe. Ha jól céloztunk, akkor a múmia rájön, hogy célszerűbb várni a feltámadással még egy 3-4000 évet és visszacsukja magára az ajtaját. Miután ez megtörtént, menjünk a víztárolóhoz és töltsük meg a kulacsunkat. A szarkofág mellett egy kincsesládát is találunk, aminek kifosztása után észak felé vesszük utunkat. Azaz csak vennénk: egy keresztléc zárja el az utat. Ereszkedjünk négykézlábra. így már át tudunk mászni alatta és kimehetünk az ajtón.</p>
+      <p>Egy nyíl van a falon. Lőjünk bele, abból még nem volt baj. Most is hatásos volt, mert megint MATCH MADE feliratot kapunk. Ballagjunk le a lépcsőn és nézzünk körbe. Kelet felé egy érdekes ajtót láthatunk. Meg kéne vizsgálni, de nem tudunk odamenni a gát miatt. A teendő nyilvánvaló, BASIC-ben valahogy így szól: FOR1-1 TO/6: TEENDŐ - DURR: NEXT I. Na, most már odamehetünk. Ez a falból kimelkedő dolog is valami varázsajtó, de ankh-hal nem akar kinyílni. Hm, hát akkor próbáljuk benyomni. Nem hatásos. Akkor esetleg álljunk a bal oldalára és nyomjuk dél felé. No effect. Most már csak egy variáns maradt: a másik oldalára állunk, és észak felé toljuk. Aha, mégiscsak kinyílt. Talán akkor menjünk is be...</p>
+      <p>Az ILLUSION-útvesztőbe kerültünk, a piramis alagsorában. Ez az a hely, ahol a legtöbb játékos el szokott akadni. A térképre nem rajzoltuk fel, mert felesleges: szóban könnyebb. Itt most eltekintünk az égtájas meghatározástól, mert — úgy tűnik — az iránytű néha nem azt mutatja, amit kéne. Tehát akkor: balra/jobbra/jobbra/előre/vissza (tehát ugyanott, ahol kijöttünk, de ne forduljunk meg, hanem ESSLHÉÉA Ha d csináltuk a elesés sk szemben iség lépcsőnek kell lennie. Menjünk fel rajta. Jé...</p>
+      <p>E 7 4 Most megtudtuk, hogy mitől hívják ezt a helyet ILLUSION-nak. Ugyanis kikerültünk a Szaharába, és KÉT piramist látunk. Mi ez?</p>
+      <p>MT&quot; Hi Ű I; 1! Érzékcsalódás vagy a TOTAL ECLIPSE II. beharangozó reklámhi Ü Hu a ja? Na mindegy. Nézzünk körül és újabb meglepetés ér bennünhit</p>
+      <p>ket. Egy bódé. Hoppá, csak nem egy hotdog-árus? Nem, innen jöttünk ki, Viszont mintha mögötte is látszana valami a homokban. Na menjünk csak oda... Valamilyen ábra van a homokba rajzolva. Pisztoly elő, durr egyet neki. Egy MATCH MADE kíséretében eltűnt, viszont a pontszámunkban jelentős változások álltak be. Mintha egy kicsit megnövekedett volna. Menjünk visza a bódéba. Ha a szemben lévő lépcsőn felballagunk, visszakerülünk oda, ahol a kőajtót eltoltuk és bejöttünk a labirintusba.</p>
+      <p>Folytassuk utunkat továbbra is nyugat felé, fel a lépcsőkön, majd a következő szobában távozzunk az ajtón dél felé. Ez már ismerős hely, itt már jártunk néhányszor. Haladjunk tovább a lépcsőn nyugat felé. A szobában rögtön a bejárat mellet jobbra egy ankh-ot, illetve egy kincsesládát találunk. Ezeket szeretettel be is gyűjtjük. A szoba túloldalán egy trükkös falat láthatunk, ami fel/le megy, ha lövöldözünk rá. Csiki-csuki. Egyébként teljesen lényegtelen számunkra, menjünk inkább tovább nyugat felé, azon az ajtón keresztül, amelyhez a lépcső vezet.</p>
+      <p>Egy olyan szobába érkeztünk, ahol egy L alakú függőfolyosó látható a légtérben; Álljunk a szoba közepére és nézzünk fel a mennyezetre. Nicsak, egy ankh lóg a plafonról lefelé! Mit csinál az ott? Lőjünk bele néhányat a tartókötélbe, mire lepottyan és mi felvehetjük. Távozzunk dél felé, majd a következő szobában a lépcső alatti ajtón forduljunk északra. Egy nagyon kellemes helyre érkeztünk. Egy kacskaringós függőfolyosón kell átkecmeregnünk. Egy rossz lépés és zutty! — lepottyanunk. Nézzünk pontosan a lábunk elé, így biztosan sikerülni fog. Persze nem árt, ha a kísérletezés előtt kimentjük az állást.</p>
+      <p>Ha sikerült kikeverednünk a kijáraton, a nyugat felé vezető ajtón kellene továbbhaladnunk. Itt azonban egy kicsit nehézkes a haladás, mert egy lépcső alatt bukkantunk elő, és az árkádok alatt próbáljuk elérni a nyugat felé vezető ajtót.</p>
+      <p>Egy platóra érkezünk. Ha lenézünk, egy múmiát láthatunk az egyik lépcsőn álldogálni, aki kedélyesen tüzet nyit mindenkire, aki legalább 2000 évvel fiatalabb nála (ebbe a kategóriába mi is beletartozunk). Pottyanjunk le a platóról, szaladjunk át a múmia előtt és távozzunk a dél felé vezető lépcsős ajtón. Egy szobába érkezünk, ami tele van mindenféle dobozokkal, a falon meg valamilyen kék lepedő látható. Mi a manó lehet ez? Később még visszatérünk rá, most menjünk tovább dél felé.</p>
+      <p>Megint egy platóra érkeztünk. Alul semmi sincs, de velünk egy vonalban egy függőhíd vezet keresztül az egyik ajtótol a... hoppá, hol a! Nincs másik ajtó. Ez a függőhíd ugyanis egy tréfás szerkezet, amely a középpontja körül FOROG -— na persze csak akkor, ha belelövünk egyet. Tegyünk így. Most pontósan be kell mennünk a közepéig, hogy újabb elfordításnál le ne pottyanjunk róla. Állítsuk a lépésméretet maximumra, lépjünk előre négyet, majd vegyük a minimumra, és vissza egyet. Most lőjünk bele egyet a hídba és rögtön kiderül, hogy jó helyre álltunk-e. Ha nem estünk le, akkor jó, távozhatunk kelet felé az ajtón (ha leestünk, töltsük vissza az utolsó kimentett állást).</p>
+      <p>Ahova érkezünk, nem egy túl barátságos hely: egy hatalmas fal zárja el az utat. Ez ne nagyon zavarjon bennünket, mert amiért jöttünk az itt van mellettünk. A falon egy meghatározhatatlan fajú madár rajza található, alatta pedig... nem, nem a tojása, csak egy doboz. Ez viszont elég érdekes doboz. Lőjünk bele egyet, mire közlik velünk, hogy MATCH MADE. Ezért jöttünk csak ide, most viszont vissza kell mennünk a lövöldözős múmiához (nyugat/4 hosszú lépés előre, 1 hátra és egy golyó a hídba/észak/észak)</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-11.jpg" alt="Total Eclipse – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>

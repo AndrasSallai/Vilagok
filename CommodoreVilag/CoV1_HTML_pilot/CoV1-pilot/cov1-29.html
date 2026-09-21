@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Commodore Világ 1. – 29. oldal, digitálisan restaurált, mobilbarát változat.">
+  <title>Commodore Világ 1. – A C nyelv</title>
+  <style>
+
+:root {
+  --blue: #138cc6;
+  --pink: #ee3f78;
+  --yellow: #e8d918;
+  --paper: #fff9e8;
+  --ink: #312921;
+  --screen: #e6e9ed;
+  --accent: var(--blue);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--screen);
+  font-family: Arial, Helvetica, sans-serif;
+}
+body[data-tone="pink"] { --accent: var(--pink); }
+body[data-tone="cover"],
+body[data-tone="ad"],
+body[data-tone="back"] { --accent: var(--yellow); }
+.toolbar {
+  width: min(1100px, calc(100% - 28px));
+  margin: 22px auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.toolbar strong { font-size: 16px; }
+.toolbar__nav { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.toolbar a { color: #075b8b; }
+.navlink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 6px 11px;
+  color: #075b8b;
+  background: #fff;
+  border: 1px solid #bfd0d9;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.navlink:hover, .navlink:focus-visible { color: #fff; background: var(--accent); border-color: var(--accent); }
+.paper {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 28px;
+  padding: 8px 12px 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(108,77,25,.018) 0 1px, transparent 1px 4px),
+    var(--paper);
+  box-shadow: 0 5px 28px #15233120;
+}
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 94px;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.masthead__title {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--accent);
+  font: 700 clamp(24px, 5vw, 55px)/1.1 Georgia, "Times New Roman", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.masthead__number {
+  align-self: start;
+  color: #261d18;
+  font: 900 88px/.82 Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.page-border {
+  padding: 4px 20px 34px;
+  border-left: 9px solid var(--accent);
+  border-right: 9px solid var(--accent);
+  border-bottom: 9px solid var(--accent);
+}
+.editorial {
+  font-size: clamp(14px, 1.58vw, 17px);
+  line-height: 1.28;
+  letter-spacing: .006em;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.editorial.columns-2 {
+  columns: 2 360px;
+  column-gap: 34px;
+  column-rule: 1px solid rgba(70, 60, 55, .18);
+}
+.editorial p { margin: 0 0 .68em; break-inside: avoid; }
+.editorial strong { font-weight: 750; }
+.editorial ul { padding: 0; margin: .38em 0 .7em; list-style: none; }
+.editorial li { position: relative; padding-left: 1.2em; margin: 0 0 .12em; }
+.editorial li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+.editorial .contact { margin: 1.55em 0; text-align: center; font-size: 1.06em; }
+.editorial .signoff { margin: 1.7em 0 .3em; text-align: center; font-weight: bold; font-size: 1.15em; }
+.source {
+  width: min(1100px, calc(100% - 28px));
+  margin: 0 auto 45px;
+  padding: 13px 18px 20px;
+  background: #fff;
+  border: 1px solid #d8e0e4;
+  border-radius: 6px;
+  box-shadow: 0 2px 16px #15233114;
+}
+.source summary { cursor: pointer; padding: 5px 0; color: #075b8b; font-weight: bold; }
+.source summary::marker { color: var(--accent); }
+.source img { display: block; width: min(100%, 800px); height: auto; margin: 15px auto 0; }
+.note { margin: 2px 0 12px; color: #5d6670; font-size: 13px; line-height: 1.4; }
+.pilot-note {
+  width: min(1100px, calc(100% - 28px));
+  margin: -26px auto 45px;
+  color: #687078;
+  font-size: 12px;
+  line-height: 1.45;
+}
+@media (max-width: 650px) {
+  .toolbar { width: calc(100% - 12px); margin-top: 10px; }
+  .toolbar > strong { width: 100%; }
+  .toolbar__nav { width: 100%; justify-content: space-between; }
+  .paper { width: calc(100% - 12px); padding: 5px 5px 0; }
+  .masthead { grid-template-columns: minmax(0, 1fr) 54px; gap: 5px; margin-bottom: 8px; }
+  .masthead__title { min-height: 47px; letter-spacing: .035em; }
+  .masthead__number { font-size: 53px; }
+  .page-border { padding: 5px 10px 22px; border-width: 5px; }
+  .editorial, .editorial.columns-2 { columns: 1; font-size: 16px; line-height: 1.43; letter-spacing: 0; text-align: left; }
+  .editorial p { margin-bottom: .8em; }
+  .source { width: calc(100% - 12px); }
+}
+@media print {
+  body { background: #fff; }
+  .toolbar, .source, .pilot-note { display: none; }
+  .paper { width: 100%; margin: 0; padding: 0; box-shadow: none; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .editorial { font-size: 12px; }
+  .masthead__title { font-size: 37px; }
+  .masthead__number { font-size: 70px; }
+  .page-border { padding: 4px 12px 12px; }
+}
+
+  </style>
+</head>
+<body data-tone="blue">
+  <header class="toolbar">
+    <strong>Commodore Világ · 1. szám · 29. oldal</strong>
+
+    <nav class="toolbar__nav" aria-label="Oldalak közötti navigáció">
+      <a class="navlink" href="cov1-28.html" aria-label="Előző oldal">←</a>
+      <a class="navlink" href="index.html">Tartalom</a>
+      <a class="navlink" href="#eredeti">Eredeti oldal ↓</a>
+      <a class="navlink" href="cov1-30.html" aria-label="Következő oldal">→</a>
+    </nav>
+  </header>
+  <main class="paper">
+    <header class="masthead" aria-label="Lapfejléc">
+      <div class="masthead__title">A C nyelv</div>
+      <div class="masthead__number" aria-label="29. oldal">29</div>
+    </header>
+    <article class="page-border editorial" aria-label="A C nyelv – átírt, kereshető szöveg" lang="hu">
+      <p>A C nyelv a maga nemében rendkívüli karriert futott be. Egyetemi nyelvként indult, s mára már az egyik legelterjedtebben használt rendszerprogramozási nyelv — persze az asszemblerek után. A C fordító éppen úgy elválaszthatatlan az IBM mikrogépek, mint a nagygépek (mainframe-ek) nyelvkészletétől. A programnyelvet Dennis Ritchie tervezte a BELL Laboratóriumban, a UNIX operációs rendszer megírásához. A C nyelv és a UNIX sikere összefügg: a UNIX azért volt könnyen átvihető az egyik gépről a másikra, mert teljes egészében (na jó, majdnem teljes egészében) C-ben íródott. A UNIX pedig nem akármilyen operációs rendszer, merthogy tényleg az (szemben pl. az IBM gépeken futó, DOS &quot;operációs rendszer&quot;-nek nevezett képződménnyel)</p>
+      <p>A C nyelv lényegesen eltér akár a BASIC, akár a PASCAL vagy a FORTRAN filozófiájától. Igaz, nem olyan extra, mint a FORTH vagy a LISP, de sajátos lelkülete van. Ez megkülönbözteti a háztartási személyi számítógépeken megszokottaktól — függetlenül attól, hogy mennyire inteligens változatát használjuk a BASIC-nek. Szokás azt mondani, hogy a C a legalacsonyabb szintű magasszintű nyelv, Ebben sok igazság van. Elég példaként felhozni a REGISTER kulcsszót: hatására a deklarált változót a rendszernek a processzor valamelyik regiszterében kell tárolnia.</p>
+      <p>AC — a nyelvi sajátosságok miatt — csak fordító formában képzelhető el. Jelenleg az IBM kompatibilis gépeken már léteznek olyan integrált programfejlesztési környezetek, amelyek lehetővé teszik a C programok interpreter-szerű futtatását. Ez azt jelenti, hogy a program nyomonkövethető, bármikor megszakítható és a változók értékei ellenőrizhetőek, módosíthatóak, és ezután a program tovább futtatható. Ilyen a Borland International cég Turbo C programrendszere vagy a Microsoft C 5.0-ás — vagy későbbi — verzióiban a Ouick-C integrált fejlesztői környezet.</p>
+      <p>De térjünk vissza a kisebb gépekhez. A fordítók bizonyos kellemetlen sajátosságokkal rendelkeznek. Ilyen például az, hogy a programfejlesztés egyes fázisai az alábbi részekre különülnek el egymástól:</p>
+      <p>e program szövegének megírása e szerkesztés (linkage) e fordítás 6 futtatás</p>
+      <p>Különösen kellemetlen, hogy — éppen a kis memória miatt — nincsenek igazi nyomkövetési lehetőségek: ha akármelyik fázisban hiba történik, az illető program megáll, közölve, hogy hol történt a hiba</p>
+      <p>Másik kellemetlenség, hogy a fenti rendszerkomponensek nem mindig férnek egyszerre a memóriába, ilyenkor ki kell várni, hogy a megfelelőek kerüljenek be a memóriába. Ez még lemezegység használata esetén is sok idő, hiszen pl. a a C-fordító maga is vagy 100 blokk. Ha két hibánk volt, akkor azok kijavításához háromszor kell a fordítót betöltenünk! Mindez azt jelenti, hogy célszerű alaposabban átgondolni, mit is írunk a programba, nem hagyatkozhatunk arra, hogy a gép majd úgy is kijavítja az elírásokat. Persze kiderülnek, csak kicsit lassan...</p>
+      <p>Ezek után nézzük milyen lehetőségeink vannak Commodore gépeken C-programok fejlesztésére. Commodore 64: Profi-C</p>
+      <p>A Data Becker cég által forgalmazott Profi-C rendszer a következőkből áll:</p>
+      <p>6 forrásnyelvi szerkesztő e szerkesztő</p>
+      <p>e forrásnyelvi másoló 6 futtató rendszer e C fordító 6 könyvtárak</p>
+      <p>A teljes rendszer kényelmes másolhatóságát TSS fedőnéven garázdálkodó crackereknek köszönhetjük, az általuk elkészített formában a rendszer bármely egészlemezes másolóval kényelmesen másolható...</p>
+      <p>A Commodore 64-re elkészített rendszer 128-as megfelelője. Ez a programrendszer a legszebb program amit valaha is a 128-ra készítettek. Az alapja egy parancs-processzor, amelyik a C-128-at egy CP/M-szerű géppé alakítja át. Ennek hatására a programok csak az egyik memória-szeletet használják, a másik egy RAM-disk szimulálására szolgál. Ennek köszönhetően a fordítás közbeni segédfile-ok a memóriában tarthatóak, s ez nagyban meggyorsítja a futtatható programok előállítását. Míg a C64-es verzióban a szerkesztőnek megmondhattuk, hogy BASIC-ből, vagy Profi-C-ből akarjuk a rendszert futtatni, addig a C128-as változatban készített programok már csak a C-System parancs-feldolgozója segítségével futtathatók. A két rendszer forrásnyelvi szinten többé-kevésbé kompatibilis, a C128as változathoz viszont sokkal több segédprogrmot és könyvtári file-t készítettek.</p>
+      <p>Mind a 64-es, mind a 128-as rendszer lehetővé teszi saját tervezésű karakterkészletek használatát. Erre azért van szükség, mert a C nyelvnek egy sor olyan — nélkülözhetetlen — karaktere van, amelyek az eredeti karakterkészletben nem fordulnak elő (pl. a kapcsos zárójelek).</p>
+      <p>A C-System-nek is elkészült a szabadon másolható változata, ezt V3.1-gyel jelzik. Még gyors (1570/71, 1581) lemezegységek használata esetén is lassú lehet — főleg többszörös programjavítás esetén — a fordító és a szerkesztő memóriába töltődése. Ezért elkészült a C-System-nek egy olyan változata, amelyik a Commodore 128-hoz csatlakoztatható memóriabővítőben tárolja ezeket a komponenseket. Ilyenkor pl. a fordító várakozási idő nélkül elindul. Ennek a rendszernek a használata — kényelmi szempontokból — gyakorlatilag megegyezik az IBM-en futó C rendszerekével. A C128-hoz külön megvásárolható memóriabővítőt használó rendszer verziószáma V3.11.</p>
+      <p>A Commodore 128 egyik legkellemesebb tulajdonsága, hogy tartalmaz egy beépített Z280-as processzort, amelynek segítségével a CP/M operációs rendszer V3.0-ás változata is futtatható a gépen. CP/M a 8-bítes gépek MS-DOS-a, rengeteg jó minőségű programot fejlesztettek ez alatt az operációs rendszer alatt. Szolgáltatásaik persze elmaradnak a 16 bites gépek szolgáltatásai mellett, de ezen könnyen túl tudjuk tenni magunkat. A CP/M alatt rengeteg jó C-fordítót készítettek. Ezek közül mi a Leor Zolman által készített BD C fordítót választottuk ki, főleg a kézikönyv jelmondata miatt:</p>
+    </article>
+  </main>
+  <details class="source" id="eredeti">
+    <summary>Eredeti szkennelt oldal – összehasonlításhoz (kattints ide)</summary>
+    <p class="note">Az eredeti tipográfia, illusztrációk és térképek változatlanul megmaradtak. A kép csak külön kérésre nyílik ki.</p>
+    <img src="images/cov1-29.jpg" alt="A C nyelv – eredeti, nagy felbontású szkennelt oldal" loading="lazy">
+  </details>
+  <p class="pilot-note"><strong>Pilot:</strong> az első oldal kézzel javított átirat; a többi oldal magyar OCR-ből készült, ezért a végleges közzététel előtt szövegkorrektúra szükséges.</p>
+</body>
+</html>
